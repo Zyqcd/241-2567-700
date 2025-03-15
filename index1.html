@@ -9,10 +9,12 @@
 </head>
 <body>
     <!--form-->
-    <a href="user.html">Go to User management</a>
+    <div class="top-link">
+        <a href="user.html" class="small-button">Go to User management</a>
+    </div>
 <div class="container">
     <div class="header">
-        register form
+        Register Form
     </div>
 
     <div class="flex form input">
@@ -39,7 +41,7 @@
         <input name="gender" type="radio" value="หญิง"> หญิง
         </div>
         <div>
-        <input name="gender" type="radio" value="อื่นๆ" > อื่นๆ
+        <input name="gender" type="radio" value="ไม่ระบุ" > ไม่ระบุ
         </div>
     </div>
     </div>
@@ -64,8 +66,8 @@
     <div id = message class="message"></div>
 
     <div class="center">
-        <button onclick ="submitData()" class="button">ส่งข้อมูล</button>
-    </div>
+        <button onclick="submitData()" class ="button">ส่งข้อมูล</button>
+      </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script src="index.js"></script>

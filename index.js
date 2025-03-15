@@ -1,31 +1,32 @@
-BASE_URL='http://localhost:8000'
+const BASE_URL='http://localhost:8000'
 let mode = 'CREATE' //default mode
 let selectedId = ''
+
 window.onload = async () => {
     const urlParams = new URLSearchParams(window.location.search)
-    const id = urlParams.get('id')
-    console.log('id', id)
+    const id = urlParams.get('id');
+    console.log('id', id);
     if (id) {
         mode = 'EDIT'
         selectedId = id
-
+    }
     try {
         const response = await axios.get(`${BASE_URL}/user/${id}`)
         const user = response.data
 
-        let firstnameDOM = document.querySelector('input[name=firstname]')
-        let lastnameDOM = document.querySelector('input[name=lastname]')
-        let ageDOM = document.querySelector('input[name=age]')
-        let descriptionDOM = document.querySelector('textarea[name=description]')
+        let firstnameDOM = document.querySelector('input[name=firstname]');
+        let lastnameDOM = document.querySelector('input[name=lastname]');
+        let ageDOM = document.querySelector('input[name=age]');
+        let descriptionDOM = document.querySelector('textarea[name=description]');
 
 
-        firstnameDOM.value = user.firstname
-        lastnameDOM.value = user.lastname
-        ageDOM.value = user.age
-        descriptionDOM.value = user.description
+        firstnameDOM.value = user.firstname;
+        lastnameDOM.value = user.lastname;
+        ageDOM.value = user.age;
+        descriptionDOM.value = user.description;
 
-        let genderDOMs= document.querySelectorAll('input[name=gender]') 
-        let interestDOMs = document.querySelectorAll('input[name=interest]')
+        let genderDOMs= document.querySelectorAll('input[name=gender]');
+        let interestDOMs = document.querySelectorAll('input[name=interest]');
 
         for (let i = 0; i < genderDOMs.length; i++) {
             if (genderDOMs[i].value == user.gender) {
@@ -40,29 +41,29 @@ window.onload = async () => {
         
        
 
-    } catch (error) {
-        console.error('error',error)
+    } catch (errors) {
+        console.log('error',errors)
     }
 }
 const validateData = (userData) => {
-    let errors = [];
+    let errors = []
     if (!userData.firstname) {
-        errors.push('กรุณากรอกชื่อ');
+        errors.push('กรุณากรอกชื่อ')
     }
     if (!userData.lastname) {
-        errors.push('กรุณากรอกนามสกุล');
+        errors.push('กรุณากรอกนามสกุล')
     }
     if (!userData.age) {
-        errors.push('กรุณากรอกอายุ');
+        errors.push('กรุณากรอกอายุ')
     }
     if (!userData.gender) {
-        errors.push('กรุณาเลือกเพศ');
+        errors.push('กรุณาเลือกเพศ')
     }
     if (!userData.interests) {
-        errors.push('กรุณาเลือกความสนใจ');
+        errors.push('กรุณาเลือกความสนใจ')
     }
     if (!userData.description) {
-        errors.push('กรุณากรอกคำอธิบาย');
+        errors.push('กรุณากรอกคำอธิบาย')
     }
     return errors;
 
@@ -91,9 +92,10 @@ const submitData = async () => {
             lastname: lastnameDOM.value,
             age: ageDOM.value,
             gender: genderDOM.value,
-            description: descriptionDOM.value,
-            interests: interest
-        };
+            interests: interest,
+            description: descriptionDOM.value
+            
+        }
 
         console.log('submitData', userData);
 
@@ -105,18 +107,20 @@ const submitData = async () => {
             //   errors: errors 
           // };
       // }
+      let message = 'บันทึกข้อมูลเรียบร้อย';
         if (mode == 'CREATE') {
-        const response = await axios.post(`${BASE_URL/user}`, userData);
+        const response = await axios.post(`${BASE_URL}/user`, userData);
         console.log('response', response.data);
         } else{
         const response = await axios.put(`${BASE_URL}/user/${selectedId}`, userData);
+        message = 'แก้ไขข้อมูลเรียบร้อย';
         console.log('response', response.data);
         }
-        messageDOM.innerText = 'บันทึกข้อมูลเรียบร้อย';
+        messageDOM.innerText = message;
         messageDOM.className = 'message success';
 
     } catch (error) {
-        console.log('error', error.message);
+        console.log('error message', error.message);
         console.log('error', error.errors);
 
         // ถ้ามี error.response
@@ -126,18 +130,16 @@ const submitData = async () => {
             error.errors = error.response.data.errors;
         }
 
-        let htmlData = '<div>';
-        htmlData += `<div>${error.message}</div>`;
-        htmlData += '<ul>';
+        let htmlData = '<div>'
+        htmlData += `<div>${error.message}</div>`
+        htmlData += '<ul>'
         for (let i = 0; i < error.errors.length; i++) {
-            htmlData += `<li>${error.errors[i]}</li>`;
+            htmlData += `<li>${error.errors[i]}</li>`
         }
-        htmlData += '</ul>';
-        htmlData += '</div>';
+        htmlData += '</ul>'
+        htmlData += '</div>'
 
         messageDOM.innerHTML = htmlData;  
         messageDOM.className = 'message danger';
     }
 }
-}
-

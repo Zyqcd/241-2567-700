@@ -1,75 +1,186 @@
+@font-face {
+    font-family: 'Kanit';
+    src: url('./Kanit/Kanit-Regular.ttf');
+}
 
-        @font-face {
-            font-family: 'Kanit';
-            src: url('./Kanit/Kanit-Regular.ttf')
-        }
-        body {
-            font-family: 'Kanit';
-                background-color: #c892d3;
-                font-size: 14px;
-        }
-        .container{
-            width: 100%;
-            margin-left:auto ;
-            margin-right: auto;
-            background-color: #fcf10d;
-            padding: 20px;
-            box-sizing: border-box;
-            max-width: 640px;
-        }
-        .header{
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 20px;
-    
-        }
-        .header-form{
-            width: 200px;
-        }
-        .flex{
-            display: flex;
-        }
+body {
+    margin: 0;
+    font-family: 'Kanit', Arial, sans-serif; /* ใช้ฟอนต์ Kanit */
+    background-color: #fbff00; /* สีพื้นหลังเว็บไซต์ */
+    color: #333;
+}
 
-    .form.input{
-        margin-bottom: 10px;
-    }
-    input.form{
-        margin-bottom: 10px;
-    }
-    input.form, textarea{
-        border: 1px solid rgb(54, 220, 112);
-        width: 100%;
-    }
-    .center{
-        text-align: center;
-    }
-    .button{
-        border: 0;
-        width: 50%;
-        height: 40px;
-        background-color: rgb(69, 239, 95);
-    }
-    .message{
-        margin-bottom: 20px;
-        background-color: rgb(247, 188, 93);
-        display: none;
-    }
-    .message.success{
-        background-color: rgb(69, 239, 95);
-        display: block;
-    }
-    .message.danger{
-        background-color: rgb(239, 69, 69);
-        display: block;
-    }
-    @media screen and (max-width: 768px){
-        .flex{
-            flex-direction: column;
-        }
-        .header{
-            font-size: 24px;
-        }
-        .button{
-            width: 100%;
-        }
-    }
+/* คอนเทนเนอร์ */
+.container {
+    width: 90%; /* ใช้ 90% ของหน้าจอ */
+    max-width: 900px; /* จำกัดความกว้างสูงสุด */
+    margin: 50px auto; /* จัดกลาง */
+    padding: 20px;
+    background-color: #00aeff; /* พื้นหลังสีฟ้า */
+    border-radius: 12px; /* เพิ่มมุมโค้งมน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
+}
+
+/* เฮดเดอร์ */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white; /* สีข้อความหัวเรื่อง */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* ปุ่ม Go to User management */
+.top-link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.small-button {
+    display: inline-block;
+    padding: 5px 8px; /* ลด padding */
+    background-color: #ff88e1; /* สีเขียวเข้ม */
+    color: white;
+    text-decoration: none;
+    font-size: 12px; /* ลดขนาดฟอนต์ */
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.small-button:hover {
+    background-color: #00ddff; /* สีฟ้าเมื่อ Hover */
+    transform: scale(1.05); /* ขยายเล็กน้อยเมื่อ Hover */
+}
+
+/* ฟอร์ม */
+form {
+    display: flex;
+    flex-direction: column; /* จัดฟิลด์ให้อยู่ในแนวตั้ง */
+    gap: 10px; /* ลดระยะห่างระหว่างฟิลด์ */
+}
+
+label {
+    font-size: 14px; /* ลดขนาดฟอนต์ */
+    margin-bottom: 5px;
+    color: #267F53; /* สีเขียวเข้ม */
+}
+
+input.form, textarea, select {
+    width: 100%;
+    padding: 8px; /* ลด padding */
+    border: 1px solid #006f38; /* สีเขียวเข้ม */
+    border-radius: 5px; /* เพิ่มมุมโค้งมน */
+    box-sizing: border-box;
+    font-size: 12px; /* ลดขนาดฟอนต์ */
+}
+
+/* ปุ่ม */
+.button {
+    border: 0;
+    width: 100%;
+    height: 40px; /* ลดความสูงของปุ่ม */
+    background-color: #00a050; /* สีเขียวเข้ม */
+    color: white;
+    cursor: pointer;
+    border-radius: 5px; /* เพิ่มมุมโค้งมน */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
+    transition: transform 0.2s ease, opacity 0.3s ease, background-color 0.3s ease; /* เพิ่ม transition สำหรับสี */
+    font-size: 14px; /* ลดขนาดฟอนต์ */
+}
+
+.button:hover {
+    transform: scale(1.03); /* ขยายเล็กน้อยเมื่อ Hover */
+    opacity: 0.9; /* ลดความเข้มเล็กน้อย */
+    background-color: #F5793B; /* เปลี่ยนสีปุ่มเป็นสีส้มเมื่อ Hover */
+}
+
+/* ตาราง */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: rgb(255, 255, 255); /* พื้นหลังของตาราง */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0288d1; /* หัวตารางสีฟ้าเข้ม */
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 14px;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #ff8dbd; /* แถวที่เป็นเลขคู่ */
+}
+
+tr:hover {
+    background-color: #ffc2fe; /* สีเมื่อเลื่อนเมาส์ */
+}
+
+/* Button styling for Edit and Delete */
+td button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    width: 80px; /* กำหนดขนาดปุ่มให้เท่ากัน */
+}
+
+td .btn-edit {
+    background-color: #00b706; /* สีเขียวสำหรับปุ่ม Edit */
+    color: white;
+}
+
+td .btn-edit:hover {
+    background-color: #45a049; /* สีเขียวเข้มเมื่อเมาส์วาง */
+}
+
+td .btn-delete {
+    background-color: #f44336; /* สีแดงสำหรับปุ่ม Delete */
+    color: white;
+}
+
+td .btn-delete:hover {
+    background-color: #d32f2f; /* สีแดงเข้มเมื่อเมาส์วาง */
+}
+
+/* ข้อความ */
+textarea {
+    resize: none; /* ล็อคไม่ให้ปรับขนาด */
+}
+
+.message {
+    margin-bottom: 15px; /* ลดระยะห่าง */
+    color: white;
+    padding: 8px; /* ลด padding */
+    border-radius: 5px;
+    display: none;
+    font-size: 12px; /* ลดขนาดฟอนต์ */
+}
+
+.message.success {
+    background-color: #00ff26; /* สีเขียว */
+    display: block;
+}
+
+.message.danger {
+    background-color: #ff2982; /* สีชมพู */
+    display: block;
+}

@@ -1,42 +1,57 @@
-const BASE_URL = 'http://localhost:8000'
+const BASE_URL = 'http://localhost:8000';
+
 window.onload = async () => {
-    await lodeData()
+    await loadData();
 }
-const lodeData = async () => {
-    console.log('user page loaded')
-    // 1. load user ทั้งหมด จาก api ที่เตรียมไว้
-    const response = await axios.get(`${BASE_URL}/user`)
 
-    console.log(response.data)
+const loadData = async () => {
+    console.log('user page loaded');
+    const response = await axios.get(`${BASE_URL}/user`);
+    console.log(response.data);
 
-
-    const userDOM = document.getElementById('user')
-    // 2. นำ user ทั้งหมด โหลดกลับเข้าไปใน html *แสดงเข้าไปที่ html*
+    const userDOM = document.getElementById('user');
     
-    let htmlData = '<div>'
+    let htmlData = '<table>'; 
+
     for (let i = 0; i < response.data.length; i++) {
-        let user = response.data[i]
-        htmlData += `<div>
-        ${user.id} ${user.firstname} ${user.lastname}
-        <a href='index1.html?id=${user.id}'> <button>Edit</button></a>
-        <button class = 'delete' data-id = '${user.id}'>delete</button>
-    </div>`
+        let user = response.data[i];
+        htmlData += `<tr>
+            <td>${user.id}</td>
+            <td>${user.firstname}</td>
+            <td>${user.lastname}</td>
+            <td>${user.age}</td>
+            <td>${user.gender}</td>
+            <td>${user.interests}</td>
+            <td>${user.description}</td>
+            <td class="actions">
+                <a href='index1.html?id=${user.id}'><button class="btn-edit">Edit</button></a>
+                <button class="btn-delete" data-id='${user.id}'>Delete</button>
+            </td>
+        </tr>`;
     }
-    htmlData += '</div>'
-    userDOM.innerHTML = htmlData
+    htmlData += '</table>'; 
+    userDOM.innerHTML = htmlData;
 
     // 3. delete user
-    const deleteDOMs = document.getElementsByClassName('delete')
-    for (let i = 0; i < deleteDOMs.length; i++) {
-        deleteDOMs[i].addEventListener('click', async (event) => {
-            // ดึง id ของ user ที่ต้องการลบ
-            const id = event.target.dataset.id
+    const deleteButtons = document.getElementsByClassName('btn-delete'); 
+    for (let button of deleteButtons) {
+        button.addEventListener('click', async (event) => {
+            const id = event.target.dataset.id;
             try {
-                await axios.delete(`${BASE_URL}/user/${id}`)
-                lodeData()
+                await axios.delete(`${BASE_URL}/user/${id}`);
+                loadData(); 
             } catch (error) {
-                console.error('error',error)
+                console.error('Error deleting user:', error);
             }
-        })
+        });
+    }
+
+    // 4. เพิ่ม event listener สำหรับปุ่ม "Edit"
+    const editButtons = document.getElementsByClassName('btn-edit'); 
+    for (let button of editButtons) {
+        button.addEventListener('click', (event) => {
+            const id = event.target.dataset.id;
+            window.location.href = `edit.html?id=${id}`;
+        });
     }
 }
