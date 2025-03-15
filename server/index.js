@@ -73,7 +73,7 @@ app.post('/user', async (req, res) => {
     if (errors.length > 0) {
       throw { 
         message: 'กรุณากรอกข้อมูลให้ครบถ้วน', 
-        errors: errors 
+        errors: errors
       }
     }
 
@@ -94,7 +94,7 @@ app.post('/user', async (req, res) => {
 })
 
 
- // path = GET / users /: id สำหรับดึง users รายคนออกมา
+ // path = GET / users /: id สำหรับดึง user
 app.get('/user/:id', async (req, res) => { 
   try {
    let id = req.params.id;

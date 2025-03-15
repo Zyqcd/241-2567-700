@@ -99,14 +99,7 @@ const submitData = async () => {
 
         console.log('submitData', userData);
 
-    //  const errors = validateData(userData);  // ตรวจสอบข้อมูล
 
-       // if (errors.length > 0) {
-         //  throw { 
-           //   message: 'กรุณากรอกข้อมูลให้ครบถ้วน',
-            //   errors: errors 
-          // };
-      // }
       let message = 'บันทึกข้อมูลเรียบร้อย';
         if (mode == 'CREATE') {
         const response = await axios.post(`${BASE_URL}/user`, userData);

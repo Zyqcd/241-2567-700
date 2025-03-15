@@ -32,7 +32,7 @@ const loadData = async () => {
     htmlData += '</table>'; 
     userDOM.innerHTML = htmlData;
 
-    // 3. delete user
+
     const deleteButtons = document.getElementsByClassName('btn-delete'); 
     for (let button of deleteButtons) {
         button.addEventListener('click', async (event) => {
@@ -46,7 +46,7 @@ const loadData = async () => {
         });
     }
 
-    // 4. เพิ่ม event listener สำหรับปุ่ม "Edit"
+ 
     const editButtons = document.getElementsByClassName('btn-edit'); 
     for (let button of editButtons) {
         button.addEventListener('click', (event) => {

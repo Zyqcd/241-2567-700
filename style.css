@@ -10,7 +10,7 @@ body {
     color: #333;
 }
 
-/* คอนเทนเนอร์ */
+
 .container {
     width: 90%; /* ใช้ 90% ของหน้าจอ */
     max-width: 900px; /* จำกัดความกว้างสูงสุด */
@@ -21,7 +21,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
 }
 
-/* เฮดเดอร์ */
 .header {
     text-align: center;
     margin-bottom: 20px;
